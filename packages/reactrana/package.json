@@ -1,11 +1,11 @@
 {
-  "name": "@larana/vuerana",
+  "name": "@larana/reactrana",
   "version": "0.0.4",
   "type": "module",
-  "module": "./dist/vuerana.es.js",
+  "module": "./dist/reactrana.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vuerana.es.js",
+      "import": "./dist/reactrana.es.js",
       "types": "./dist/src/index.d.ts"
     }
   },
@@ -16,13 +16,15 @@
   },
   "dependencies": {
     "larana-js": "workspace:*",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-reconciler": "0.29.2"
   },
   "devDependencies": {
+    "@types/react-reconciler": "0.28.8",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.14.5",
-    "@vitejs/plugin-vue": "5.1.4",
+    "@types/node": "^22.9.0",
+    "@vitejs/plugin-react": "4.3.3",
     "@vue/tsconfig": "0.5.1",
     "node-vite": "0.0.0-alpha.0",
     "typescript": "5.6.3",

@@ -1,0 +1,26 @@
+{
+  "name": "larana-vite-example",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm vite-node ./src/index.js",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "larana-js": "workspace:*",
+    "vue": "3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "5.1.4",
+    "@vue/tsconfig": "0.5.1",
+    "node-vite": "0.0.0-alpha.0",
+    "typescript": "5.6.3",
+    "vite": "5.4.9",
+    "vite-node": "^2.1.3"
+  }
+}
