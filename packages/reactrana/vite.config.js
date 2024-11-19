@@ -23,5 +23,6 @@ export default defineConfig({
     rollupOptions: {
       external: ["react", "larana-js"],
     },
+    minify: false
   },
 });

@@ -1,30 +1,111 @@
 import {
     LaranaApp,
-    createConfig,
+    defineConfig,
+    DefaultRouter,
     ServerRenderer,
-    MemoryStateManager
+    MemoryStateManager,
+    Page,
+    layout
 } from 'larana-js'
+import { createApp } from './reconciler';
+import { ReactranaElement } from './reconciler/createNode';
 
-export { render } from './reconciler';
+interface ReactranaReactContext {
+    appComponent: any;
+    routes: any[];
+}
+
+function reactRoutesToLaranaRoutes(ctx: ReactranaReactContext) {
+    console.log('@@@', ctx);
+    return ctx.routes.map((route) => {
+        class ReactranaPage extends Page {
+            app = null;
+
+            title() {
+                return route.name || 'Larana Unknown Page'
+            }
+
+            rerenderTimeout: NodeJS.Timeout | null = null
+
+            state!: {
+                rootChild: ReactranaElement
+            }
+
+            rerenderWithTimeout() {
+                if (!this.rerenderTimeout) {
+                  this.rerenderTimeout = setTimeout(() => {
+                    console.log('rerender')
+                    this.rerender()
+                    this.rerenderTimeout = null
+                  }, 0)
+                }
+              }
+        
+              init() {
+                this.state = { 
+                    rootChild: {
+                      props: {},
+                      setProps(props: any) {
+                        this.props = props
+                      },
+          
+                      ref: null,
+                      refSetter: {
+                        set current(newRef: unknown) {},
+                        get current() { return null },
+                      },
+                      parent: null,
+                      children: [],
+                      id: -1,
+                      render() {
+                        return this.children.map((child) => child.render())[0]
+                      },
+                    } as ReactranaElement
+                  }
+
+                this.app = this.state.rootChild;
+
+                createApp(route.component, this.state.rootChild);
+              } 
+        
+              root() {
+                console.log('@render');
+                return this.app?.render() ?? layout({})
+              }
+            }
+        
+            return {
+              path: route.path,
+              name: route.name,
+              page: ReactranaPage,
+            }
+    })
+}
+
 
 export class Reactrana implements LaranaApp {
     private laranaApp: LaranaApp
-    private config: ReturnType<typeof createConfig>
+    private reactContext: ReactranaReactContext
+    private config: ReturnType<typeof defineConfig>
 
     constructor(app: any) {
-        this.config = createConfig({
-            debug: true,
-            port: 3000,
-            wsPath: 'ws://localhost:3000/',
-            maxFPS: 60,
-            maxBandwidth: 10 * 1024, // 10 kb TODO
-            sessionLifetime: 5 * (60 * 1000), // 5 minutes
-            storePreviousRender: true,
+        this.reactContext = {
+            appComponent: app,
+            routes: []
+        }
+
+        this.config = defineConfig({
+            port: 1610,
+            defaultTheme: 'dark',
+            debug: false
         })
     }
 
+    router(routes: any[]) {
+        this.reactContext.routes = routes;
+    }
 
-    mount() {
+    run() {
         this.laranaApp = new LaranaApp({
             config: this.config,
 
@@ -38,10 +119,10 @@ export class Reactrana implements LaranaApp {
                 debug: this.config.debug,
             }),
 
-            // router: new DefaultRouter({
-            //     debug: this.config.debug,
-            //     routes: vueRoutesToLaranaRoutes(this.vueContext),
-            // }),
+            router: new DefaultRouter({
+                debug: this.config.debug,
+                routes: reactRoutesToLaranaRoutes(this.reactContext),
+            }),
         })
 
         return this.laranaApp.run()
