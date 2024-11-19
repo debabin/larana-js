@@ -1,39 +1,39 @@
 {
-	"name": "larana-js",
-	"version": "0.2.6",
-	"description": "Real SSR framework",
-	"main": "index.js",
-	"scripts": {
-		"test": "vitest run",
-		"lint": "eslint . --ignore-pattern node_modules"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/laranatech/larana-js.git"
-	},
-	"keywords": [
-		"js",
-		"framework",
-		"ssr",
-		"larana",
-		"larana-js",
-		"laranatech"
-	],
-	"author": "Evgenii Kucheriavyi",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/laranatech/larana-js/issues"
-	},
-	"homepage": "https://github.com/laranatech/larana-js#readme",
-	"devDependencies": {
-		"@eslint/js": "^8.57.1",
-		"eslint": "^8.57.1",
-		"globals": "^15.11.0"
-	},
-	"dependencies": {
-		"@laranatech/schemer": "^1.0.6",
-		"canvas": "^2.11.2",
-		"qrcode": "^1.5.4",
-		"ws": "^8.18.0"
-	}
+  "name": "larana-js",
+  "version": "0.2.6",
+  "description": "Real SSR framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "lint": "eslint . --ignore-pattern node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laranatech/larana-js.git"
+  },
+  "keywords": [
+    "js",
+    "framework",
+    "ssr",
+    "larana",
+    "larana-js",
+    "laranatech"
+  ],
+  "author": "Evgenii Kucheriavyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laranatech/larana-js/issues"
+  },
+  "homepage": "https://github.com/laranatech/larana-js#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "eslint": "^9.15.0",
+    "globals": "^15.11.0"
+  },
+  "dependencies": {
+    "@laranatech/schemer": "^1.0.6",
+    "canvas": "^2.11.2",
+    "qrcode": "^1.5.4",
+    "ws": "^8.18.0"
+  }
 }
