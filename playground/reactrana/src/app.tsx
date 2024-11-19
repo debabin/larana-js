@@ -1,14 +1,5 @@
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      layout: any;
-      button: {
-        text: string;
-      }
-    }
-  }
-}
-
-const App = () => <layout><button text='reactlana' /></layout>
+const App = () => <layout>
+    <button text='reactlana' onClick={() => console.log('@click')}/>
+</layout>
 
 export default App

@@ -125,6 +125,7 @@ export class Reactrana implements LaranaApp {
             }),
         })
 
+        console.log('@larana', this.laranaApp.router.routes);
         return this.laranaApp.run()
     }
 }
